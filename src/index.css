@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1a472a; /* Dark Green */
+  --color-secondary: #c5a059; /* Light Gold */
+  --color-accent: #f4f1ea; /* Light Gray/Cream Background */
+  --font-heading: "Cairo", sans-serif;
+  --font-body: "Cairo", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-accent text-gray-900 font-body;
+    direction: rtl;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+.manuscript-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.manuscript-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('https://picsum.photos/seed/manuscript/1920/1080?blur=10');
+  background-size: cover;
+  opacity: 0.1;
+  z-index: -1;
+  animation: slowPan 60s linear infinite;
+}
+
+@keyframes slowPan {
+  from { background-position: 0% 0%; }
+  to { background-position: 100% 100%; }
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #c5a059 0%, #e2c275 50%, #c5a059 100%);
+}
+
+.nav-link {
+  @apply px-4 py-2 text-gray-700 hover:text-primary transition-colors duration-200 font-medium;
+}
+
+.nav-link-active {
+  @apply text-primary border-b-2 border-primary;
+}
