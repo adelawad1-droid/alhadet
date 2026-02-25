@@ -35,6 +35,9 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  const isHomePage = location.pathname === '/';
+  const shouldShowSolid = scrolled || !isHomePage;
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
@@ -44,7 +47,7 @@ export const Navbar = () => {
   return (
     <nav className={cn(
       "fixed top-0 w-full z-50 transition-all duration-300",
-      scrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
+      shouldShowSolid ? "bg-white shadow-md py-2" : "bg-transparent py-4"
     )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
@@ -55,7 +58,7 @@ export const Navbar = () => {
             </div>
             <div className={cn(
               "flex flex-col",
-              scrolled ? "text-primary" : "text-white"
+              shouldShowSolid ? "text-primary" : "text-white"
             )}>
               <span className="font-heading text-lg leading-tight font-bold">رابطة أهل الحديث</span>
               <span className="text-xs opacity-80">بالجمهورية اليمنية</span>
@@ -70,8 +73,8 @@ export const Navbar = () => {
                   to={item.path}
                   className={cn(
                     "px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1",
-                    scrolled ? "text-gray-700 hover:text-primary" : "text-white/90 hover:text-white",
-                    location.pathname === item.path && (scrolled ? "text-primary bg-primary/5" : "text-white bg-white/10")
+                    shouldShowSolid ? "text-gray-700 hover:text-primary" : "text-white/90 hover:text-white",
+                    location.pathname === item.path && (shouldShowSolid ? "text-primary bg-primary/5" : "text-white bg-white/10")
                   )}
                 >
                   {item.name}
@@ -97,7 +100,7 @@ export const Navbar = () => {
             ))}
             
             <button className="mr-4 p-2 rounded-full hover:bg-gray-100 transition-colors">
-              <Search size={20} className={scrolled ? "text-gray-600" : "text-white"} />
+              <Search size={20} className={shouldShowSolid ? "text-gray-600" : "text-white"} />
             </button>
             
             <Link 
@@ -114,7 +117,7 @@ export const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               className={cn(
                 "p-2 rounded-md",
-                scrolled ? "text-gray-700" : "text-white"
+                shouldShowSolid ? "text-gray-700" : "text-white"
               )}
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
